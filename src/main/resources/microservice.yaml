@@ -1,11 +1,11 @@
-APPLICATION_ID: pojotest
+APPLICATION_ID: huaweiair
 service_description:
-  name: pojo
+  name: OrderService
   version: 0.0.1
 cse:
   service:
     registry:
-      address: https://127.0.0.1:9980
+      address: https://127.0.0.1:30010
   config:
     client:
       serverUri: https://127.0.0.1:30103
@@ -14,8 +14,6 @@ cse:
   monitor:
     client:
       serverUri: https://127.0.0.1:30109
-  grpc:
-    address: 0.0.0.0:9090
   rest:
     address: 0.0.0.0:8080
   handler:

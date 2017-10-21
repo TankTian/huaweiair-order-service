@@ -1,0 +1,108 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "rest test"
+  x-java-interface: "com.services.pojo.csedemo.OrderManage"
+basePath: "/huaweiair/v1"
+schemes:
+- "http"
+produces:
+- "application/json"
+paths:
+  /orders:
+    post:
+      operationId: "createOrders"
+      parameters:
+      - in: "body"
+        name: "order"
+        required: true
+        schema:
+          $ref: "#/definitions/FlightFlag"
+      responses:
+        200:
+          description: "create order success"
+          schema:
+            type: "boolean"
+      x-contentType: "application/json"
+      x-accepts: "application/json"
+    get:
+      operationId: "getAllOrders"
+      responses:
+        200:
+          description: "get all orders success"
+          schema:
+            $ref: "#/definitions/Order"
+      x-contentType: "application/json"
+      x-accepts: "application/json"
+    put:
+      operationId: "modifyOrder"
+      parameters:
+      - in: "query"
+        name: "orderId"
+        required: true
+        type: "string"
+      - in: "query"
+        name: "action"  #0 pay,1 refund,3 ready pay
+        required: true
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "modify order success"
+          schema:
+            type: "boolean"
+      x-contentType: "application/json"
+      x-accepts: "application/json"
+    delete:
+      operationId: "deleteOrder"
+      parameters:
+      - in: "query"
+        name: "orderId"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "delete order success"
+          schema:
+            type: "boolean"
+      x-contentType: "application/json"
+      x-accepts: "application/json"
+definitions:
+  FlightFlag:
+    type: "object"
+    properties:
+      toFlightId:
+        type: "string"
+      toFlightClass:
+        type: "integer" #0 first class,1  second class.
+        format: "int32"
+      returnFlightId:
+        type: "string"
+      returnFlightClass:  #0 first class,1  second class.
+        type: "integer"
+        format: "int32"
+  Order:
+    type: "object"
+    properties:
+      orderId:
+        type: "string"
+      flightId:
+        type: "string"
+      name:
+        type: "string"
+      flightTime:
+        type: "string"
+      flightClass:
+        type: "integer"
+        format: "int32"
+      flightPrice:
+        type: "integer"
+        format: "int32"     
+      orderTime:
+        type: "string"   
+      orderStatus:
+        type: "integer"
+        format: "int32"
+        
+        
