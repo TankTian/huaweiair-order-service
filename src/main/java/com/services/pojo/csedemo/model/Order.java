@@ -2,7 +2,9 @@
 package com.services.pojo.csedemo.model;
 
 public class Order {
+
   private String orderId;
+  private String userId;
   private String flightId;
   private String name;
   private String flightTime;
@@ -10,6 +12,14 @@ public class Order {
   private int flightPrice;
   private String orderTime;
   private int orderStatus;
+
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
   public String getOrderId() {
     return orderId;

@@ -1,19 +1,11 @@
-APPLICATION_ID: huaweiair
+APPLICATION_ID: acmeair
 service_description:
   name: OrderService
   version: 0.0.1
 cse:
   service:
     registry:
-      address: https://127.0.0.1:30010
-  config:
-    client:
-      serverUri: https://127.0.0.1:30103
-      refreshMode: 0
-      refresh_interval: 5000
-  monitor:
-    client:
-      serverUri: https://127.0.0.1:30109
+      address: http://10.229.34.220:30100
   rest:
     address: 0.0.0.0:8080
   handler:

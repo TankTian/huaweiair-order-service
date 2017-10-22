@@ -8,28 +8,26 @@ import io.servicecomb.provider.pojo.RpcSchema;
 
 @RpcSchema(schemaId = "order")
 public class OrderManageImpl implements OrderManage {
+  private OrderManage orderManage = new OrderManageAgent();
 
   @Override
   public boolean createOrders(FlightFlag flightFlag) {
-    return true;
+    return orderManage.createOrders(flightFlag);
   }
 
   @Override
-  public Order[] getAllOrders() {
-    // TODO Auto-generated method stub
-    return new Order[]{new Order()};
+  public Order[] getAllOrders(String userId) {
+    return orderManage.getAllOrders(userId);
   }
 
   @Override
   public boolean modifyOrder(String orderId, int action) {
-    // TODO Auto-generated method stub
-    return true;
+    return orderManage.modifyOrder(orderId, action);
   }
 
   @Override
   public boolean deleteOrder(String orderId) {
-    // TODO Auto-generated method stub
-    return true;
+    return orderManage.deleteOrder(orderId);
   }
 
 }

@@ -7,7 +7,7 @@ import com.services.pojo.csedemo.model.Order;
 public interface OrderManage {
   boolean createOrders(FlightFlag flightFlag);
 
-  Order[] getAllOrders();
+  Order[] getAllOrders(String userId);
 
   boolean modifyOrder(String orderId, int action);
 

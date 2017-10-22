@@ -12,7 +12,7 @@ import io.servicecomb.foundation.common.utils.Log4jUtils;
  * @see  [相关类/方法]
  * @since  [产品/模块版本]
  */
-public class SpringPojoServer {
+public class HuaweiAirOrderServer {
     public static void main(String[] args) throws Exception {
         Log4jUtils.init();
         BeanUtils.init();

@@ -28,11 +28,18 @@ paths:
       x-accepts: "application/json"
     get:
       operationId: "getAllOrders"
+      parameters:
+      - in: "query"
+        name: "userId"
+        required: true
+        type: "string"
       responses:
         200:
           description: "get all orders success"
           schema:
-            $ref: "#/definitions/Order"
+            type: "array"
+            items:
+              $ref: "#/definitions/Order"
       x-contentType: "application/json"
       x-accepts: "application/json"
     put:
@@ -72,14 +79,30 @@ definitions:
   FlightFlag:
     type: "object"
     properties:
+      userId:
+        type: "string"
+      originPort:
+        type: "string"
+      destPort:
+        type: "string"
       toFlightId:
+        type: "string"
+      toFlightTime:
         type: "string"
       toFlightClass:
         type: "integer" #0 first class,1  second class.
         format: "int32"
+      toFlightPrice:
+        type: "integer" 
+        format: "int32"
       returnFlightId:
         type: "string"
       returnFlightClass:  #0 first class,1  second class.
+        type: "integer"
+        format: "int32"
+      returnFlightTime:
+        type: "string"
+      returnFlightPrice:
         type: "integer"
         format: "int32"
   Order:
