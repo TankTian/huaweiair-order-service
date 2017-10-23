@@ -36,7 +36,7 @@ public class OrderManageAgent implements OrderManage {
       toFlightOrder.setUserId(flightFlag.getUserId());
       toFlightOrder.setOrderId(UUID.randomUUID().toString());
       toFlightOrder.setFlightId(flightFlag.getToFlightId());
-      toFlightOrder.setName(flightFlag.getOriginPort()+"-"+flightFlag.getDestPort());
+      toFlightOrder.setName(flightFlag.getFromAirPortName()+"-"+flightFlag.getToAirPortName());
       toFlightOrder.setFlightTime(flightFlag.getToFlightTime());
       toFlightOrder.setFlightClass(flightFlag.getToFlightClass());
       toFlightOrder.setFlightPrice(flightFlag.getToFlightPrice());
@@ -44,15 +44,15 @@ public class OrderManageAgent implements OrderManage {
       toFlightOrder.setOrderStatus(0);
       flagOne = dbAdapter.insertOrder(toFlightOrder);
     }
-    if (null != flightFlag.getReturnFlightId() && !flightFlag.getReturnFlightId().isEmpty()) {
+    if (null != flightFlag.getRetFlightId() && !flightFlag.getRetFlightId().isEmpty()) {
       Order returnFlightOrder = new Order();
       returnFlightOrder.setUserId(flightFlag.getUserId());
       returnFlightOrder.setOrderId(UUID.randomUUID().toString());
-      returnFlightOrder.setFlightId(flightFlag.getReturnFlightId());
-      returnFlightOrder.setName(flightFlag.getDestPort()+"-"+flightFlag.getOriginPort());
-      returnFlightOrder.setFlightTime(flightFlag.getReturnFlightTime());
-      returnFlightOrder.setFlightClass(flightFlag.getReturnFlightClass());
-      returnFlightOrder.setFlightPrice(flightFlag.getReturnFlightPrice());
+      returnFlightOrder.setFlightId(flightFlag.getRetFlightId());
+      returnFlightOrder.setName(flightFlag.getToAirPortName()+"-"+flightFlag.getFromAirPortName());
+      returnFlightOrder.setFlightTime(flightFlag.getRetFlightTime());
+      returnFlightOrder.setFlightClass(flightFlag.getRetFlightClass());
+      returnFlightOrder.setFlightPrice(flightFlag.getRetFlightPrice());
       returnFlightOrder.setOrderTime("" + System.currentTimeMillis());
       returnFlightOrder.setOrderStatus(0);
 

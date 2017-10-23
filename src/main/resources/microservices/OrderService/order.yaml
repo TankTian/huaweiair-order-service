@@ -81,9 +81,9 @@ definitions:
     properties:
       userId:
         type: "string"
-      originPort:
+      fromAirPortName:
         type: "string"
-      destPort:
+      toAirPortName:
         type: "string"
       toFlightId:
         type: "string"
@@ -95,16 +95,31 @@ definitions:
       toFlightPrice:
         type: "integer" 
         format: "int32"
-      returnFlightId:
+      retFlightId:
         type: "string"
-      returnFlightClass:  #0 first class,1  second class.
+      retFlightClass:  #0 first class,1  second class.
         type: "integer"
         format: "int32"
-      returnFlightTime:
+      retFlightTime:
         type: "string"
-      returnFlightPrice:
+      retFlightPrice:
         type: "integer"
         format: "int32"
+      toFlightSegId:
+        type: "string"
+      retFlightSegId:
+        type: "string"
+      oneWayFlight:
+        type: "boolean"
+      toScheduledDepartureTime:
+        type: "string"
+      toScheduledArrivalTime:
+        type: "string"
+      retScheduledDepartureTime:
+        type: "string"
+      retScheduledArrivalTime:
+        type: "string"
+        
   Order:
     type: "object"
     properties:
