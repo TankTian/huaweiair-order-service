@@ -37,7 +37,8 @@ public class OrderManageAgent implements OrderManage {
       toFlightOrder.setOrderId(UUID.randomUUID().toString());
       toFlightOrder.setFlightId(flightFlag.getToFlightId());
       toFlightOrder.setName(flightFlag.getFromAirPortName()+"-"+flightFlag.getToAirPortName());
-      toFlightOrder.setFlightTime(flightFlag.getToFlightTime());
+      toFlightOrder.setScheduledDepartureTime(flightFlag.getToScheduledDepartureTime());
+      toFlightOrder.setScheduledArrivalTime(flightFlag.getToScheduledArrivalTime());
       toFlightOrder.setFlightClass(flightFlag.getToFlightClass());
       toFlightOrder.setFlightPrice(flightFlag.getToFlightPrice());
       toFlightOrder.setOrderTime("" + System.currentTimeMillis());
@@ -50,7 +51,8 @@ public class OrderManageAgent implements OrderManage {
       returnFlightOrder.setOrderId(UUID.randomUUID().toString());
       returnFlightOrder.setFlightId(flightFlag.getRetFlightId());
       returnFlightOrder.setName(flightFlag.getToAirPortName()+"-"+flightFlag.getFromAirPortName());
-      returnFlightOrder.setFlightTime(flightFlag.getRetFlightTime());
+      returnFlightOrder.setScheduledDepartureTime(flightFlag.getRetScheduledDepartureTime());
+      returnFlightOrder.setScheduledArrivalTime(flightFlag.getRetScheduledArrivalTime());
       returnFlightOrder.setFlightClass(flightFlag.getRetFlightClass());
       returnFlightOrder.setFlightPrice(flightFlag.getRetFlightPrice());
       returnFlightOrder.setOrderTime("" + System.currentTimeMillis());

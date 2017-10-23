@@ -29,11 +29,11 @@ import com.services.pojo.csedemo.model.Order;
  */
 public class MysqlAdapter implements DbAdapter {
   private static String tableName = "huaweiair_order";
-  private static String dbUrl = "jdbc:mysql://10.229.44.124:3306/"+tableName+"";
+  private static String dbUrl = "jdbc:mysql://10.229.44.124:3306/" + tableName + "";
   private static String dbUserName = "root";
   private static String dbPassword = "huawei@123";
   private static String jdbcName = "com.mysql.jdbc.Driver";
- 
+
 
 
   private static Statement stmt;
@@ -58,24 +58,25 @@ public class MysqlAdapter implements DbAdapter {
   }
 
   public static void main(String[] args) throws Exception {
-    
-    String xmString = new String("北京".toString().getBytes("UTF-8"));  
-    System.out.println(xmString) ;  
-    String  xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");  
-    System.out.println("utf-8 编码：" + xmlUTF8) ;  
-//      xmlUTF8 = URLEncoder.encode(xmlUTF8, "UTF-8"); 
-    System.out.println("utf-8 编码：" + new String(xmlUTF8.getBytes(),"UTF-8")) ;  
-      xmString =  URLDecoder.decode(xmlUTF8, "UTF-8");
-//      xmlUTF8 = URLEncoder.(xmlUTF8, "GBK");  
-//    System.out.println("utf-8 编码：" + URLDecoder.decode(xmlUTF8, "UTF-8");) ;  
-    
-    
+
+    String xmString = new String("北京".toString().getBytes("UTF-8"));
+    System.out.println(xmString);
+    String xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
+    System.out.println("utf-8 编码：" + xmlUTF8);
+    // xmlUTF8 = URLEncoder.encode(xmlUTF8, "UTF-8");
+    System.out.println("utf-8 编码：" + new String(xmlUTF8.getBytes(), "UTF-8"));
+    xmString = URLDecoder.decode(xmlUTF8, "UTF-8");
+    // xmlUTF8 = URLEncoder.(xmlUTF8, "GBK");
+    // System.out.println("utf-8 编码：" + URLDecoder.decode(xmlUTF8, "UTF-8");) ;
+
+
     Order order = new Order();
     order.setOrderId("11111");
     order.setUserId("tanktank");
     order.setFlightId("1111111");
     order.setName(xmlUTF8);
-    order.setFlightTime("2017");
+    order.setScheduledDepartureTime("2012");
+    order.setScheduledArrivalTime("2017");
     order.setFlightClass(2);
     order.setFlightPrice(333);
     order.setOrderTime("2013");
@@ -90,16 +91,16 @@ public class MysqlAdapter implements DbAdapter {
     System.out.println(orders);
     System.out.println(orders[0].getFlightId());
     System.out.println(orders[0].getName());
-    System.out.println("utf-8 编码：" + URLDecoder.decode(orders[0].getName(), "UTF-8")) ;  
+    System.out.println("utf-8 编码：" + URLDecoder.decode(orders[0].getName(), "UTF-8"));
 
   }
 
   @Override
   public boolean insertOrder(Order order) {
-    String sql = "INSERT INTO "+tableName+" VALUES ('" + order.getOrderId() + "', " + "'" + order.getUserId() + "', '"
-        + order.getFlightId() + "', '" + order.getName() + "', '" + order.getFlightTime() + "', '"
-        + order.getFlightClass() + "', '" + order.getFlightPrice() + "', '" + order.getOrderTime() + "', '"
-        + order.getOrderStatus() + "')";
+    String sql = "INSERT INTO " + tableName + " VALUES ('" + order.getOrderId() + "', " + "'" + order.getUserId()
+        + "', '" + order.getFlightId() + "', '" + order.getName() + "', '" + order.getScheduledDepartureTime() + "', '"
+        + order.getScheduledArrivalTime() + "', '" + order.getFlightClass() + "', '" + order.getFlightPrice() + "', '"
+        + order.getOrderTime() + "', '" + order.getOrderStatus() + "')";
     try {
       System.out.println(sql);
       stmt.executeUpdate(sql);
@@ -113,7 +114,7 @@ public class MysqlAdapter implements DbAdapter {
 
   @Override
   public boolean updateOrder(String orderId, int action) {
-    String sql = "UPDATE "+tableName+" SET orderstatus='" + action + "'  WHERE orderId='" + orderId + "'";
+    String sql = "UPDATE " + tableName + " SET orderstatus='" + action + "'  WHERE orderId='" + orderId + "'";
     try {
       System.out.println(sql);
       stmt.executeUpdate(sql);
@@ -126,7 +127,7 @@ public class MysqlAdapter implements DbAdapter {
 
   @Override
   public boolean deleteOrder(String orderId) {
-    String sql = "DELETE FROM "+tableName+" WHERE orderId='" + orderId + "'";
+    String sql = "DELETE FROM " + tableName + " WHERE orderId='" + orderId + "'";
     try {
       System.out.println(sql);
       stmt.executeUpdate(sql);
@@ -139,21 +140,24 @@ public class MysqlAdapter implements DbAdapter {
 
   @Override
   public Order[] queryOrders(String userId) {
-    String sql = "SELECT * FROM "+tableName+" WHERE userId='" + userId + "'";
+    String sql = "SELECT * FROM " + tableName + " WHERE userId='" + userId + "'";
     try {
       System.out.println(sql);
       ResultSet re = stmt.executeQuery(sql);
       try {
         List<?> reList = populate(re, Order.class);
+        if (null == reList || reList.isEmpty()) {
+          return new Order[] {};
+        }
         return (Order[]) reList.toArray(new Order[] {new Order()});
       } catch (InstantiationException | IllegalAccessException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-      return null;
+      return new Order[] {};
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return null;
+    return new Order[] {};
   }
 }

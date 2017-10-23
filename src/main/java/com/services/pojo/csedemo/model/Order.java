@@ -7,11 +7,28 @@ public class Order {
   private String userId;
   private String flightId;
   private String name;
-  private String flightTime;
+  private String scheduledDepartureTime;
+  private String scheduledArrivalTime;
   private int flightClass;
   private int flightPrice;
   private String orderTime;
   private int orderStatus;
+
+  public String getScheduledDepartureTime() {
+    return scheduledDepartureTime;
+  }
+
+  public void setScheduledDepartureTime(String scheduledDepartureTime) {
+    this.scheduledDepartureTime = scheduledDepartureTime;
+  }
+
+  public String getScheduledArrivalTime() {
+    return scheduledArrivalTime;
+  }
+
+  public void setScheduledArrivalTime(String scheduledArrivalTime) {
+    this.scheduledArrivalTime = scheduledArrivalTime;
+  }
 
   public String getUserId() {
     return userId;
@@ -43,14 +60,6 @@ public class Order {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public String getFlightTime() {
-    return flightTime;
-  }
-
-  public void setFlightTime(String flightTime) {
-    this.flightTime = flightTime;
   }
 
   public int getFlightClass() {

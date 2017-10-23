@@ -42,11 +42,12 @@ paths:
               $ref: "#/definitions/Order"
       x-contentType: "application/json"
       x-accepts: "application/json"
+  /orders/{orderId}:
     put:
       operationId: "modifyOrder"
       parameters:
-      - in: "query"
-        name: "orderId"
+      - name: "orderId"
+        in: "path"
         required: true
         type: "string"
       - in: "query"
@@ -64,7 +65,7 @@ paths:
     delete:
       operationId: "deleteOrder"
       parameters:
-      - in: "query"
+      - in: "path"
         name: "orderId"
         required: true
         type: "string"
@@ -75,6 +76,7 @@ paths:
             type: "boolean"
       x-contentType: "application/json"
       x-accepts: "application/json"
+      
 definitions:
   FlightFlag:
     type: "object"
@@ -142,5 +144,9 @@ definitions:
       orderStatus:
         type: "integer"
         format: "int32"
+      scheduledDepartureTime:
+        type: "string"
+      scheduledArrivalTime:
+        type: "string"
         
         
