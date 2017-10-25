@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
 import com.services.pojo.csedemo.model.Order;
 
 /**
@@ -28,8 +29,9 @@ import com.services.pojo.csedemo.model.Order;
  * @author tank
  */
 public class MysqlAdapter implements DbAdapter {
+  private static String databaseName = "huaweiair_order";
   private static String tableName = "huaweiair_order";
-  private static String dbUrl = "jdbc:mysql://10.229.44.124:3306/" + tableName + "";
+  private static String dbUrl = "jdbc:mysql://mysql:30006/";
   private static String dbUserName = "root";
   private static String dbPassword = "huawei@123";
   private static String jdbcName = "com.mysql.jdbc.Driver";
@@ -37,6 +39,30 @@ public class MysqlAdapter implements DbAdapter {
 
 
   private static Statement stmt;
+
+  /**
+   * 当数据库不存在就创建库，初始化表 <br/>
+   * 
+   * @param stmt
+   */
+  private void initDb(Statement stmt) {
+    try {
+      stmt.execute("use " + databaseName);
+    } catch (SQLException e) {
+      if (e instanceof MySQLSyntaxErrorException) {
+        if (e.getMessage().contains("Unknown database")) {
+          try {
+            stmt.execute("create database " + databaseName);
+            stmt.execute("use " + databaseName);
+            stmt.execute("CREATE TABLE " + tableName
+                + " ( orderId varchar(255),userId varchar(255), flightId varchar(255), name varchar(255), scheduledDepartureTime varchar(255), scheduledArrivalTime varchar(255), flightClass int, flightPrice int, orderTime varchar(255), orderStatus int, PRIMARY KEY (orderId) ) ");
+          } catch (SQLException e1) {
+            e1.printStackTrace();
+          }
+        }
+      }
+    }
+  }
 
   public MysqlAdapter() {
     try {
@@ -48,10 +74,11 @@ public class MysqlAdapter implements DbAdapter {
     }
     Connection con = null;
     try {
+      System.out.println("获取数据库连接开始");
       con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
       System.out.println("数据库连接成功");
-
       stmt = con.createStatement();
+      initDb(stmt);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -59,22 +86,11 @@ public class MysqlAdapter implements DbAdapter {
 
   public static void main(String[] args) throws Exception {
 
-    String xmString = new String("北京".toString().getBytes("UTF-8"));
-    System.out.println(xmString);
-    String xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
-    System.out.println("utf-8 编码：" + xmlUTF8);
-    // xmlUTF8 = URLEncoder.encode(xmlUTF8, "UTF-8");
-    System.out.println("utf-8 编码：" + new String(xmlUTF8.getBytes(), "UTF-8"));
-    xmString = URLDecoder.decode(xmlUTF8, "UTF-8");
-    // xmlUTF8 = URLEncoder.(xmlUTF8, "GBK");
-    // System.out.println("utf-8 编码：" + URLDecoder.decode(xmlUTF8, "UTF-8");) ;
-
-
     Order order = new Order();
     order.setOrderId("11111");
     order.setUserId("tanktank");
     order.setFlightId("1111111");
-    order.setName(xmlUTF8);
+    order.setName("北京");
     order.setScheduledDepartureTime("2012");
     order.setScheduledArrivalTime("2017");
     order.setFlightClass(2);
