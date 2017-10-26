@@ -1,8 +1,8 @@
 
-package com.services.pojo.csedemo;
+package com.huaweiair.order.manage;
 
-import com.services.pojo.csedemo.model.FlightFlag;
-import com.services.pojo.csedemo.model.Order;
+import com.huaweiair.order.model.FlightFlag;
+import com.huaweiair.order.model.Order;
 
 import io.servicecomb.provider.pojo.RpcSchema;
 
@@ -29,5 +29,4 @@ public class OrderManageImpl implements OrderManage {
   public boolean deleteOrder(String orderId) {
     return orderManage.deleteOrder(orderId);
   }
-
 }

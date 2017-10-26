@@ -1,13 +1,12 @@
 
-package com.services.pojo.csedemo;
+package com.huaweiair.order.manage;
 
 import java.util.UUID;
 
-import com.services.pojo.csedemo.model.FlightFlag;
-import com.services.pojo.csedemo.model.Order;
-
-import dao.DbAdapter;
-import dao.MysqlAdapter;
+import com.huaweiair.order.dao.OrderDbAdapter;
+import com.huaweiair.order.dao.MysqlOrderDbAdapterImpl;
+import com.huaweiair.order.model.FlightFlag;
+import com.huaweiair.order.model.Order;
 
 /**
  * 
@@ -18,7 +17,7 @@ import dao.MysqlAdapter;
  * @author tank tian
  */
 public class OrderManageAgent implements OrderManage {
-  private DbAdapter dbAdapter = new MysqlAdapter();
+  private OrderDbAdapter dbAdapter = new MysqlOrderDbAdapterImpl("49.4.2.165",30006);
 
   /**
    * <br/>

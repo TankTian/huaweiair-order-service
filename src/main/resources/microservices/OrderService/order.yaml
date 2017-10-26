@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   version: "1.0.0"
   title: "rest test"
-  x-java-interface: "com.services.pojo.csedemo.OrderManage"
+  x-java-interface: "com.huaweiair.order.manage.OrderManage"
 basePath: "/huaweiair/v1"
 schemes:
 - "http"

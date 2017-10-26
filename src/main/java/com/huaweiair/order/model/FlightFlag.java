@@ -1,24 +1,26 @@
 
-package com.services.pojo.csedemo.model;
+package com.huaweiair.order.model;
 
 public class FlightFlag {
   private String userId;
+  private boolean oneWayFlight;
+  
   private String fromAirPortName;
-  private String toAirPortName;
   private String toFlightId;
   private String toFlightTime;
   private String toScheduledDepartureTime;
   private String toScheduledArrivalTime;
   private int toFlightClass;
   private int toFlightPrice;
+  private String toFlightSegId;
+  
   private String retFlightId;
   private int retFlightClass;
   private String retFlightTime;
-  private String toFlightSegId;
   private String retFlightSegId;
-  private boolean oneWayFlight;
   private String retScheduledArrivalTime;
   private String retScheduledDepartureTime;
+  private String toAirPortName;
   
   public String getToScheduledDepartureTime() {
     return toScheduledDepartureTime;

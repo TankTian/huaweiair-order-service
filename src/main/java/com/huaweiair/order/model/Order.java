@@ -1,5 +1,5 @@
 
-package com.services.pojo.csedemo.model;
+package com.huaweiair.order.model;
 
 public class Order {
 

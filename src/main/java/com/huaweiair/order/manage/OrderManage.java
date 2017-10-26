@@ -1,8 +1,8 @@
 
-package com.services.pojo.csedemo;
+package com.huaweiair.order.manage;
 
-import com.services.pojo.csedemo.model.FlightFlag;
-import com.services.pojo.csedemo.model.Order;
+import com.huaweiair.order.model.FlightFlag;
+import com.huaweiair.order.model.Order;
 
 public interface OrderManage {
   boolean createOrders(FlightFlag flightFlag);
