@@ -17,7 +17,15 @@ import com.huaweiair.order.model.Order;
  * @author tank tian
  */
 public class OrderManageAgent implements OrderManage {
-  private OrderDbAdapter dbAdapter = new MysqlOrderDbAdapterImpl("49.4.2.165",30006);
+  private OrderDbAdapter dbAdapter;
+
+  public OrderManageAgent() {
+    String ip = System.getenv("MYSQL_IP");
+    String port = System.getenv("MYSQL_PORT");
+    dbAdapter =
+        new MysqlOrderDbAdapterImpl(null != ip ? ip : "mysql", null != port ? Integer.parseInt(port) : 30006);
+
+  }
 
   /**
    * <br/>
@@ -27,7 +35,7 @@ public class OrderManageAgent implements OrderManage {
    */
   @Override
   public boolean createOrders(FlightFlag flightFlag) {
-//todo 航班号是确定一趟航班 如果航班中间停怎么办？？ 什么来标识路段？？？segment
+    // todo 航班号是确定一趟航班 如果航班中间停怎么办？？ 什么来标识路段？？？segment
     boolean flagOne = false;
     boolean flagTwo = false;
     if (null != flightFlag.getToFlightId() && !flightFlag.getToFlightId().isEmpty()) {
@@ -35,7 +43,7 @@ public class OrderManageAgent implements OrderManage {
       toFlightOrder.setUserId(flightFlag.getUserId());
       toFlightOrder.setOrderId(UUID.randomUUID().toString());
       toFlightOrder.setFlightId(flightFlag.getToFlightId());
-      toFlightOrder.setName(flightFlag.getFromAirPortName()+"-"+flightFlag.getToAirPortName());
+      toFlightOrder.setName(flightFlag.getFromAirPortName() + "-" + flightFlag.getToAirPortName());
       toFlightOrder.setScheduledDepartureTime(flightFlag.getToScheduledDepartureTime());
       toFlightOrder.setScheduledArrivalTime(flightFlag.getToScheduledArrivalTime());
       toFlightOrder.setFlightClass(flightFlag.getToFlightClass());
@@ -49,7 +57,7 @@ public class OrderManageAgent implements OrderManage {
       returnFlightOrder.setUserId(flightFlag.getUserId());
       returnFlightOrder.setOrderId(UUID.randomUUID().toString());
       returnFlightOrder.setFlightId(flightFlag.getRetFlightId());
-      returnFlightOrder.setName(flightFlag.getToAirPortName()+"-"+flightFlag.getFromAirPortName());
+      returnFlightOrder.setName(flightFlag.getToAirPortName() + "-" + flightFlag.getFromAirPortName());
       returnFlightOrder.setScheduledDepartureTime(flightFlag.getRetScheduledDepartureTime());
       returnFlightOrder.setScheduledArrivalTime(flightFlag.getRetScheduledArrivalTime());
       returnFlightOrder.setFlightClass(flightFlag.getRetFlightClass());
