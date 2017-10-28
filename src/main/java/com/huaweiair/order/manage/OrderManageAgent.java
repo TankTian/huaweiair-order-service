@@ -3,8 +3,11 @@ package com.huaweiair.order.manage;
 
 import java.util.UUID;
 
-import com.huaweiair.order.dao.OrderDbAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.huaweiair.order.dao.MysqlOrderDbAdapterImpl;
+import com.huaweiair.order.dao.OrderDbAdapter;
 import com.huaweiair.order.model.FlightFlag;
 import com.huaweiair.order.model.Order;
 
@@ -18,10 +21,11 @@ import com.huaweiair.order.model.Order;
  */
 public class OrderManageAgent implements OrderManage {
   private OrderDbAdapter dbAdapter;
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(OrderManageAgent.class);
   public OrderManageAgent() {
-    String ip = System.getenv("MYSQL_IP");
-    String port = System.getenv("MYSQL_PORT");
+    String ip = System.getenv("MYSQL_DB_IP");
+    String port = System.getenv("MYSQL_DB_PORT");
+    LOGGER.info("mysql ip: {} port: {}",ip,port);
     dbAdapter =
         new MysqlOrderDbAdapterImpl(null != ip ? ip : "mysql", null != port ? Integer.parseInt(port) : 30006);
 
