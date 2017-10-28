@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.huaweiair.order.model.Order;
 
 public class MysqlAdapterTest {
-  @Test
+  // @Test
   public void testDb() {
     Order order = new Order();
     order.setOrderId("tank01");
@@ -30,18 +30,15 @@ public class MysqlAdapterTest {
     mysqlAdapter.insertOrder(order);
     mysqlAdapter.updateOrder(order.getOrderId(), 9);
     Order[] orders = mysqlAdapter.queryOrders(order.getUserId());
-    for(Order orderTem :orders)
-    {
-      boolean isExist=false;
-      if(orderTem.getOrderId().equals("tank01"))
-      {
+    for (Order orderTem : orders) {
+      boolean isExist = false;
+      if (orderTem.getOrderId().equals("tank01")) {
         assertEquals("北京-天津", orderTem.getName());
-        isExist=true;
+        isExist = true;
       }
-      if(orderTem.getOrderId().equals("tank02"))
-      {
+      if (orderTem.getOrderId().equals("tank02")) {
         assertEquals("上海-深圳", orderTem.getName());
-        isExist=true;
+        isExist = true;
       }
       assertTrue(isExist);
     }

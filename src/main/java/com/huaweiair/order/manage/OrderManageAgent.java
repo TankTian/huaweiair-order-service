@@ -1,6 +1,8 @@
 
 package com.huaweiair.order.manage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -39,9 +41,11 @@ public class OrderManageAgent implements OrderManage {
    */
   @Override
   public boolean createOrders(FlightFlag flightFlag) {
-    // todo 航班号是确定一趟航班 如果航班中间停怎么办？？ 什么来标识路段？？？segment
     boolean flagOne = false;
     boolean flagTwo = false;
+    Date date = new Date();  
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+    String dateNowStr = simpleDateFormat.format(date);  
     if (null != flightFlag.getToFlightId() && !flightFlag.getToFlightId().isEmpty()) {
       Order toFlightOrder = new Order();
       toFlightOrder.setUserId(flightFlag.getUserId());
@@ -52,7 +56,7 @@ public class OrderManageAgent implements OrderManage {
       toFlightOrder.setScheduledArrivalTime(flightFlag.getToScheduledArrivalTime());
       toFlightOrder.setFlightClass(flightFlag.getToFlightClass());
       toFlightOrder.setFlightPrice(flightFlag.getToFlightPrice());
-      toFlightOrder.setOrderTime("" + System.currentTimeMillis());
+      toFlightOrder.setOrderTime(dateNowStr);
       toFlightOrder.setOrderStatus(0);
       flagOne = dbAdapter.insertOrder(toFlightOrder);
     }
@@ -66,7 +70,7 @@ public class OrderManageAgent implements OrderManage {
       returnFlightOrder.setScheduledArrivalTime(flightFlag.getRetScheduledArrivalTime());
       returnFlightOrder.setFlightClass(flightFlag.getRetFlightClass());
       returnFlightOrder.setFlightPrice(flightFlag.getRetFlightPrice());
-      returnFlightOrder.setOrderTime("" + System.currentTimeMillis());
+      returnFlightOrder.setOrderTime(dateNowStr);
       returnFlightOrder.setOrderStatus(0);
 
       flagTwo = dbAdapter.insertOrder(returnFlightOrder);
